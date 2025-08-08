@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/SoumyaRaikwar/api_students/internal/config"
+	"github.com/SoumyaRaikwar/api_students/internal/http/handlers/student"
 )
 
 func main() {
@@ -20,13 +21,7 @@ func main() {
 
 	// Setup router
 	router := http.NewServeMux()
-	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodGet {
-			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
-			return
-		}
-		w.Write([]byte("Welcome to Students API"))
-	})
+	router.HandleFunc("POST /api/students", student.New()) // Use the student handler
 
 	// Setup server using corrected field
 	server := http.Server{
