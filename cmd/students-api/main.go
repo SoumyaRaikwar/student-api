@@ -29,6 +29,7 @@ slog.Info("storage initialized", slog.String("env",cfg.Env),slog.String("version
 	// Setup router
 	router := http.NewServeMux()
 	router.HandleFunc("POST /api/students", student.New(storage)) // Use the student handler
+	router.HandleFunc("GET /api/students/{id}", student.GetById(storage)) // Use the GetAll handler
 
 	// Setup server using corrected field
 	server := http.Server{
